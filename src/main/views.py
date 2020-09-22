@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, redirect, render
 
 
 from .forms import BookForm, UserForm
-from .models import Book, User
+from .models import Book, Logger, User
 
 
 def add_user(request):
@@ -67,6 +67,11 @@ def delete_book(request, arg):
     return redirect('book_list')
 
 
+def clear_log(request):
+    Logger.objects.all().delete()
+    return redirect('log')
+
+
 def user_list(request):
     users = User.objects.all()
     count = users.count()
@@ -87,3 +92,14 @@ def book_list(request):
         'books': books,
     }
     return render(request, 'book_list.html', context=context)
+
+
+def log(request):
+    notes = Logger.objects.all()
+    count = Logger.objects.count()
+    context = {
+        'title': 'Users list',
+        'count': count,
+        'notes': notes,
+    }
+    return render(request, 'Log.html', context=context)
