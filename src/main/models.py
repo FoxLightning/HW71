@@ -38,3 +38,9 @@ class Logger(models.Model):
     path = models.CharField(max_length=100, verbose_name='Path')
     response_time = models.CharField(max_length=100, verbose_name="Response time")
     created = models.DateTimeField(auto_now_add=True)
+
+
+class Contact(models.Model):
+    subject = models.CharField(max_length=128)
+    text = models.TextField(max_length=1024)
+    sends = models.DateTimeField(auto_now_add=True)

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+Number of notes: {{ count }}
+<br>
+<table border="1">
+   <caption>Sands mail</caption>
+   <tr>
+    <th>Id</th>
+    <th>Subject</th>
+    <th>Text</th>
+    <th>Sends date</th>
+   </tr>
+   {% for el in notes %}
+      <tr>
+         <td>{{ el.id }}</td>
+         <td>{{ el.subject }}</td>
+         <td>{{ el.text }}</td>
+         <td>{{ el.sends }}</td>
+      <tr>
+   {% endfor %}
+</table>
+{% endblock content %}

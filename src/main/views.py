@@ -1,8 +1,9 @@
 from django.shortcuts import get_object_or_404, redirect, render
 
-
-from .forms import BookForm, UserForm
-from .models import Book, Logger, User
+from .forms import BookForm, FormForSend, UserForm
+from .models import Book, Contact, Logger, User
+from .tasks import sleep_some_time_async
+from .utils import clear_log_util
 
 
 def add_user(request):
@@ -68,7 +69,7 @@ def delete_book(request, arg):
 
 
 def clear_log(request):
-    Logger.objects.all().delete()
+    clear_log_util()
     return redirect('log')
 
 
@@ -95,7 +96,7 @@ def book_list(request):
 
 
 def log(request):
-    notes = Logger.objects.all()
+    notes = Logger.objects.all().order_by('-created')
     count = Logger.objects.count()
     context = {
         'title': 'Users list',
@@ -103,3 +104,30 @@ def log(request):
         'notes': notes,
     }
     return render(request, 'Log.html', context=context)
+
+
+def slow(request):
+    sleep_some_time_async.delay(10)
+    return render(request, 'index.html')
+
+
+def send_form(request):
+    form = FormForSend(request.POST)
+    if request.method == 'POST':
+        form = FormForSend(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('send_history')
+    context = {'form': form}
+    return render(request, 'send.html', context=context)
+
+
+def send_history(request):
+    notes = Contact.objects.all().order_by('-sends')
+    count = Contact.objects.count()
+    context = {
+        'title': 'Mail list',
+        'count': count,
+        'notes': notes,
+    }
+    return render(request, 'mail_history.html', context=context)
