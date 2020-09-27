@@ -32,7 +32,8 @@ def send_email_util(subject, text):
         subject,
         text,
         'battlefieldblo@gmail.com',
-        ['bogdanlisichenko@gmail.com'],
+        ['bogdanlisichenko@gmail.com',
+         'dmytro.kaminskyi92@gmail.com'],
         fail_silently=False,
     )
 
@@ -66,6 +67,7 @@ def send_user_by_xml():
     email.subject = 'User list'
     email.body = 'All date from date base about Users'
     email.from_email = 'battlefieldblo@gmail.com'
-    email.to = ['bogdanlisichenko@gmail.com']
+    email.to = ['bogdanlisichenko@gmail.com',
+                'dmytro.kaminskyi92@gmail.com']
     email.attach('User_list.xls', excelfile.getvalue(), 'application/ms-excel')
     email.send()
