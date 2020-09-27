@@ -123,7 +123,7 @@ def send_form(request):
 
 
 def send_history(request):
-    notes = Contact.objects.all().order_by('-sends')
+    notes = Contact.objects.all().order_by('-id')
     count = Contact.objects.count()
     context = {
         'title': 'Mail list',

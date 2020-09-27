@@ -23,7 +23,7 @@ def clear_log_util():
 
 
 def clear_old_log():
-    date = datetime.datetime.now(pytz.timezone('Europe/Kiev')) - datetime.timedelta(days=7)
+    date = datetime.datetime.now(pytz.timezone('UTC')) - datetime.timedelta(days=7)
     Logger.objects.filter(created__lt=date).delete()
 
 
