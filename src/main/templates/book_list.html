@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   Number of books: {{ count }} <a href="{% url 'add_book' %}"> add</a> <br>
+   <br>
+   {% for el in books %}
+      <a href="{% url 'delete_book' el.id %}">X</a>
+      <a href="{% url 'edit_book' el.id %}">{{ el.id }}</a>,
+      {{ el.title }},
+      {{ el.p_date}}
+      <br>
+   {% endfor %}
+{% endblock content %}

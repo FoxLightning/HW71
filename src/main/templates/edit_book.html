@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<form method="post">
+        {% csrf_token %}
+        <table border="1">
+            <tr>
+                <th>Field</th>
+                <th>Old</th>
+                <th>New</th>
+            </tr>
+            <caption><h1>Edit book id: {{ book.id }}</h1></caption>
+            <tr><td>Title:</td><td>{{ book.title }}</td><td>{{ form.title }}</td></tr>
+            <tr><td>Publication date:</td><td>{{ book.p_date }}</td><td>{{ form.p_date }}</td></tr>
+        </table>
+        <button type="Submit">Submit</button>
+    </form>
+{% endblock content %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+Number of user: {{ count }} <a href="{% url 'add_user' %}"> add</a> <br>
+<br>
+{% for el in users %}
+   <a href="{% url 'delete_user' el.id %}">X</a>
+   <a href="{% url 'edit_user' el.id %}">{{ el.id }}</a>,
+   {{ el.f_name }},
+   {{ el.l_name }},
+   {{ el.b_date }},
+   {{ el.email }},
+   <br>
+{% endfor %}
+{% endblock content %}
