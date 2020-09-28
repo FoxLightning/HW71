@@ -4,6 +4,7 @@ from .forms import BookForm, FormForSend, UserForm
 from .models import Book, Contact, Logger, User
 from .tasks import sleep_some_time_async
 from .utils import clear_log_util
+from django.db.models import Count
 
 
 def add_user(request):
@@ -85,12 +86,14 @@ def user_list(request):
 
 
 def book_list(request):
-    books = Book.objects.all()
+    books = Book.objects.prefetch_related('category')
     count = books.count()
+    t_s = 'element' if count == 1 else 'elements'
     context = {
-        'title': 'Book list',
+        'title': 'Books list',
         'count': count,
         'books': books,
+        't_s': t_s,
     }
     return render(request, 'book_list.html', context=context)
 
@@ -131,3 +134,17 @@ def send_history(request):
         'notes': notes,
     }
     return render(request, 'mail_history.html', context=context)
+
+
+def categories(request):
+    qs = Book.objects.select_related('category') \
+        .only('category__name')\
+        .values('category__name')\
+        .annotate(total=Count('category__name'))\
+        .order_by('-total')
+    num = qs.count()
+    context = {
+        'qs': qs,
+        'num': num,
+    }
+    return render(request, 'categories.html', context=context)

@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   Number of books: {{ count }} <a href="{% url 'add_book' %}"> add</a> <br>
    <br>
-   {% for el in books %}
-      <a href="{% url 'delete_book' el.id %}">X</a>
-      <a href="{% url 'edit_book' el.id %}">{{ el.id }}</a>,
-      {{ el.title }},
-      {{ el.p_date}}
-      <br>
-   {% endfor %}
+   <table border="1">
+      <caption>{{ title }}: {{ count }} {{ t_s }} </caption>
+      <tr>
+          <th>Id</th>
+          <th>Title</th>
+          <th>Publication date</th>
+          <th>Category</th>
+      </tr>
+      {% for el in books %}
+         <tr>
+             <td>{{ el.id }}</td>
+             <td>{{ el.title }}</td>
+             <td>{{ el.p_date }}</td>
+             <td>{{ el.category.name }}</td>
+         </tr>
+      {% endfor %}
 {% endblock content %}

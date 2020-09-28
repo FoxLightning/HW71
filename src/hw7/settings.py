@@ -28,8 +28,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'debug_toolbar',
     'main',
     'django_extensions',
+
+
 ]
 
 MIDDLEWARE = [
@@ -42,6 +45,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'main.middlewares.LoggerSave',
     'main.middlewares.GoogleLeadMid',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'hw7.urls'
@@ -133,3 +137,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
