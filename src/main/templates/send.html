@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+        <table border="1">
+            <caption><h1>Send form</h1></caption>
+            <tr><td>Subject:</td><td>{{ form.subject }}</td></tr>
+            <tr><td>Text:</td><td>{{ form.text }}</td></tr>
+        </table>
+        <button type="Submit">Send</button>
+    </form>
+{% endblock content %}

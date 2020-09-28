@@ -5,7 +5,7 @@ class User(models.Model):
     f_name = models.CharField(max_length=100, verbose_name='First Name')
     l_name = models.CharField(max_length=100, verbose_name='Last Name')
     b_date = models.DateField(verbose_name='Date of birth')
-    email = models.EmailField(unique=True)
+    email = models.EmailField(unique=True, verbose_name='Email')
     phone = models.CharField(max_length=30, verbose_name='Phone number', default=None)
 
     def get_full_name(self):
@@ -38,3 +38,9 @@ class Logger(models.Model):
     path = models.CharField(max_length=100, verbose_name='Path')
     response_time = models.CharField(max_length=100, verbose_name="Response time")
     created = models.DateTimeField(auto_now_add=True)
+
+
+class Contact(models.Model):
+    subject = models.CharField(max_length=128)
+    text = models.TextField(max_length=1024)
+    sends = models.DateTimeField(auto_now_add=True)
