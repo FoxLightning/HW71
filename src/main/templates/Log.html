@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+Number of notes: {{ count }} <a href="{% url 'clear_log' %}">Clear</a>
+<br>
+<table border="1">
+   <caption>Log</caption>
+   <tr>
+    <th>Id</th>
+    <th>Method</th>
+    <th>Path</th>
+    <th>Response time</th>
+    <th>Created date</th>
+   </tr>
+   {% for el in notes %}
+      <tr>
+         <td>{{ el.id }}</td>
+         <td>{{ el.method }}</td>
+         <td>{{ el.path }}</td>
+         <td>{{ el.response_time }}</td>
+         <td>{{ el.created }}</td>
+      <tr>
+   {% endfor %}
+</table>
+{% endblock content %}

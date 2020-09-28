@@ -1,13 +1,12 @@
 from django.forms import ModelForm
 
-
 from .models import Book, User
 
 
 class UserForm(ModelForm):
     class Meta:
         model = User
-        fields = ['f_name', 'l_name', 'b_date', 'email']
+        fields = ['f_name', 'l_name', 'b_date', 'email', 'phone']
 
 
 class BookForm(ModelForm):
