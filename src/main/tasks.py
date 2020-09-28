@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from .utils import clear_log_util, clear_old_log, send_user_by_xml, sleep_some_time, fill_book
+from .utils import clear_log_util, clear_old_log, fill_book, send_user_by_xml, sleep_some_time
 
 
 @shared_task

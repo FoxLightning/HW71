@@ -23,6 +23,11 @@ class Book(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     p_date = models.CharField(max_length=100, verbose_name='Publication date')
     category = models.ForeignKey('main.Category', on_delete=models.SET_NULL, null=True)
+    authors = models.ManyToManyField('main.User')
+
+    @property
+    def authors_name_list(self):
+        return ', '.join([str(i) for i in self.authors.all()])
 
     def __str__(self):
         return self.title

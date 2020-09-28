@@ -1,9 +1,10 @@
-from django.core.management.base import BaseCommand, CommandError
+from django.core.management.base import BaseCommand
+
 from main.utils import fill_user
 
 
 class Command(BaseCommand):
-    help = 'Generate random users'
+    help = 'Generate random users'  # noqa
 
     def add_arguments(self, parser):
         parser.add_argument('-n', '--number', type=int, help='Number of users to be created')

@@ -1,10 +1,11 @@
+from django.db.models import Count
 from django.shortcuts import get_object_or_404, redirect, render
+
 
 from .forms import BookForm, FormForSend, UserForm
 from .models import Book, Contact, Logger, User
 from .tasks import sleep_some_time_async
 from .utils import clear_log_util
-from django.db.models import Count
 
 
 def add_user(request):
@@ -138,7 +139,6 @@ def send_history(request):
 
 def categories(request):
     qs = Book.objects.select_related('category') \
-        .only('category__name')\
         .values('category__name')\
         .annotate(total=Count('category__name'))\
         .order_by('-total')

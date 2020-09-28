@@ -4,6 +4,7 @@ from time import sleep
 
 from django.core.mail import EmailMessage
 from django.core.mail import send_mail
+from django.db.utils import IntegrityError
 
 from faker import Faker
 
@@ -11,11 +12,8 @@ import pytz
 
 import xlwt
 
-
 from .models import Book, Category, Logger, User
 
-
-from django.db.utils import IntegrityError
 
 fake = Faker()
 
@@ -74,10 +72,15 @@ def fill_book(number=100):
     category_n = Category.objects.count()
     l_n = category_n if category_n <= number else number
     category = list(Category.objects.order_by('?')[:l_n])
+    users = list(User.objects.order_by('?'))
+    user_num = len(users)
     for _ in range(number):
-        Book.objects.create(title=fake.word(),
-                            p_date=fake.date(),
-                            category=category[fake.random_int(min=0, max=(l_n - 1), step=1)])
+        book = Book.objects.create(title=fake.word(),
+                                   p_date=fake.date(),
+                                   category=category[fake.random_int(min=0, max=(l_n - 1), step=1)],)
+        book.authors.add(*[users[fake.random_int(min=0, max=(user_num-1), step=1)]
+                           for _ in range(fake.random_int(min=1, max=4, step=1))])
+        book.save()
 
 
 def fill_user(number=100):
@@ -95,4 +98,3 @@ def fill_user(number=100):
 def fill_category(number=10):
     for _ in range(number):
         Category.objects.create(name=fake.word())
-

@@ -26,5 +26,4 @@ urlpatterns = [
     path('send_history/', views.send_history, name='send_history'),
 
     path('categories/', views.categories, name='categories'),
-
 ]

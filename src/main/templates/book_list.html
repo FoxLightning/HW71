@@ -9,6 +9,7 @@
           <th>Title</th>
           <th>Publication date</th>
           <th>Category</th>
+          <th>Authors</th>
       </tr>
       {% for el in books %}
          <tr>
@@ -16,6 +17,7 @@
              <td>{{ el.title }}</td>
              <td>{{ el.p_date }}</td>
              <td>{{ el.category.name }}</td>
+             <td>{{ el.authors_name_list }}</td>
          </tr>
       {% endfor %}
 {% endblock content %}
