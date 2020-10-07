@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<table border="1">
+   <caption>Category list: {{ num }} el.</caption>
+   <tr>
+    <th>Category name</th>
+    <th>Books num</th>
+   </tr>
+   {% for el in qs %}
+      <tr>
+         <td>{{ el.category__name }}</td>
+         <td>{{ el.total }}</td>
+      <tr>
+   {% endfor %}
+</table>
+{% endblock content %}

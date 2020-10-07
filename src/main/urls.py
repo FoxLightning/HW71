@@ -23,6 +23,7 @@ urlpatterns = [
     path('slow/', views.slow, name='slow'),
 
     path('send/', views.send_form, name='send'),
-    path('send_history/', views.send_history, name='send_history')
+    path('send_history/', views.send_history, name='send_history'),
 
+    path('categories/', views.categories, name='categories'),
 ]

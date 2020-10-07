@@ -1,6 +1,6 @@
 from celery import shared_task
 
-from .utils import clear_log_util, clear_old_log, send_user_by_xml, sleep_some_time
+from .utils import clear_log_util, clear_old_log, fill_book, send_user_by_xml, sleep_some_time
 
 
 @shared_task
@@ -33,3 +33,8 @@ def send_email_async(subject, text):
 @shared_task
 def send_user_by_xml_async():
     send_user_by_xml()
+
+
+@shared_task
+def fill_book_async(num=100):
+    fill_book(num)

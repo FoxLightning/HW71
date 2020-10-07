@@ -22,6 +22,12 @@ class User(models.Model):
 class Book(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     p_date = models.CharField(max_length=100, verbose_name='Publication date')
+    category = models.ForeignKey('main.Category', on_delete=models.SET_NULL, null=True)
+    authors = models.ManyToManyField('main.User')
+
+    @property
+    def authors_name_list(self):
+        return ', '.join([str(i) for i in self.authors.all()])
 
     def __str__(self):
         return self.title
@@ -44,3 +50,15 @@ class Contact(models.Model):
     subject = models.CharField(max_length=128)
     text = models.TextField(max_length=1024)
     sends = models.DateTimeField(auto_now_add=True)
+
+
+class Category(models.Model):
+
+    name = models.CharField(max_length=128, verbose_name='Category name')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
