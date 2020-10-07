@@ -20,4 +20,10 @@ urlpatterns = [
     path('delete_user/<int:arg>', views.delete_user, name='delete_user'),
     path('delete_book/<int:arg>', views.delete_book, name='delete_book'),
 
+    path('slow/', views.slow, name='slow'),
+
+    path('send/', views.send_form, name='send'),
+    path('send_history/', views.send_history, name='send_history'),
+
+    path('categories/', views.categories, name='categories'),
 ]
